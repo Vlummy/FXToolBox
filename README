@@ -1,0 +1,35 @@
+FXToolbox
+
+A toolbox for making certain operations like scene switching, adding animations and using templates simpler.
+
+Classes:
+
+SceneSwitcher:
+
+SceneSwitcher is used to easily change view of the scene.
+
+Control the view of scene:
+
+button1.setOnAction(event -> {
+    SceneSwitcher sceneSwitcher = SceneSwitcher.getInstance();
+    sceneSwitcher.changeToScene(event, "fxml/scene_two.fxml"); // Relative path to resources folder
+});
+
+button2.setOnAction(event -> {
+    try {
+        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/scene_two.fxml"));
+        SceneSwitcher sceneSwitcher = SceneSwitcher.getInstance();
+        sceneSwitcher.changeToScene(event, root); // Using preloaded fxml document
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+});
+
+button3.setOnAction(event -> {
+    BorderPane borderPane = new BorderPane();
+    borderPane.setCenter(new Label("It worked!"));
+    SceneSwitcher sceneSwitcher = SceneSwitcher.getInstance();
+    sceneSwitcher.changeToScene(event, borderPane); // Using classes
+});
+
+
