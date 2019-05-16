@@ -6,9 +6,93 @@ Classes:
 
 SceneSwitcher:
 
+private SceneSwitcher $$ = SceneSwitcher.getInstance();
+
+$$.applySwitchable(primaryStage)
+        .bindDirectory("fxml", new String[] {"SceneOne", "SceneTwo"})
+        .show();
+
 SceneSwitcher is used to easily change view of the scene.
 
 Control the view of scene:
+
+Preferred setup is to make the application switchable and bind all fxml documents, or classes if you don't use fxml
+to keys. Example setup:
+
+public class Main extends Application {
+
+    public void start(Stage primaryStage) throws Exception {
+
+        SceneSwitcher.getInstance("SceneOne") // Optional, the first view to be loaded when application starts
+                .applySwitchable(primaryStage) // Make application switchable
+                .bindDirectory("fxml", new String[] {"SceneOne", "SceneTwo"}) // Bind fxml directory (.fxml files) in resources folder to array of keys
+                .show(); // Show the stage
+    }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+}
+
+Bind multiple custom classes
+
+public class Main extends Application {
+
+    public void start(Stage primaryStage) throws Exception {
+
+        SceneSwitcher.getInstance("SceneOne") // Optional, the first view to be loaded when application starts
+                .applySwitchable(primaryStage) // Make application switchable
+                .bindListOfViews( // Binds a list of Layouts to keys
+                        new Parent[] {new BorderPane(), new Login(), new GridPane()},
+                        new String[] {"BorderPane", "Login", "GridPane"})
+                .bindDirectory( // Binds a directory to keys
+                        "fxml",
+                        new String[] {"SceneOne", "SceneTwo"})
+                .show(); // Show the stage
+    }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+}
+
+You can also bind in sequence:
+
+public class Main extends Application {
+
+    public void start(Stage primaryStage) throws Exception {
+
+        SceneSwitcher.getInstance("Login") // Optional, the first view to be loaded when application starts
+                .applySwitchable(primaryStage) // Make application switchable
+                .bind("SceneOne", "fxml/scene_one.fxml")
+                .bind("SceneTwo", "fxml/scene_two.fxml")
+                .bind("BorderPaneOne", new BorderPane()) // Simple BorderPane view
+                .bind("Login", new Login()) // Custom Login view class
+                .show(); // Show the stage
+    }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+}
+
+How to switch scenes when application is switchable:
+
+switchButton.setOnAction(event -> SceneSwitcher
+        .getInstance()
+        .changeToScene("SceneTwo")); // The key that points to the requested layout
+
+or, every controller can hold a SceneSwitcher so that one does not need to use the getInstance() all the time.
+
+{
+private SceneSwitcher $$ = SceneSwitcher.getInstance();
+
+    public void initialize() {
+        switchButton.setOnAction(event -> $$.changeToScene("SceneTwo"));
+    }
+}
+
+Applying scene switching to buttons if there is no binding:
 
 button1.setOnAction(event -> {
     SceneSwitcher sceneSwitcher = SceneSwitcher.getInstance();
