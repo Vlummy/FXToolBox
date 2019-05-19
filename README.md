@@ -1,3 +1,4 @@
+![GitHub](https://img.shields.io/github/license/Vlummy/FXToolbox.svg)
 [![Build Status](https://travis-ci.org/Vlummy/FXToolbox.svg?branch=master)](https://travis-ci.org/Vlummy/FXToolbox)
 #FXToolbox
 
