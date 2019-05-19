@@ -1,16 +1,16 @@
 ![GitHub](https://img.shields.io/github/license/Vlummy/FXToolbox.svg)
 [![Build Status](https://travis-ci.org/Vlummy/FXToolbox.svg?branch=master)](https://travis-ci.org/Vlummy/FXToolbox)
 
-#FXToolbox
+# FXToolbox
 
-####A toolbox for making certain operations like scene switching, adding animations and using templates simpler.
+#### A toolbox for making certain operations like scene switching, adding animations and using templates simpler.
 
 Classes:
 Window (A custom window for javafx application)
 Router (A router for custom Window)
 SceneSwitcher (Switching scenes)
 
-#####Example using Window class:
+##### Example using Window class:
 ```java
 new Window(primaryStage)
     .bind("login", "fxml/login.fxml")
@@ -21,7 +21,7 @@ new Window(primaryStage)
     .show();
 ```
 
-#####Example using Window with Router to easily switch view:
+##### Example using Window with Router to easily switch view:
 
 ```java
 Router.connect(new Window(primaryStage)
@@ -33,7 +33,7 @@ Router.connect(new Window(primaryStage)
         .show()
 );
 ```
-#####Switching a view with Router:
+##### Switching a view with Router:
 ```java
 logInButton.setOnAction(event -> Router.switchTo("system"));
 ```
@@ -48,7 +48,7 @@ SceneSwitcher is used to easily change view of the scene, but only on Stage. If 
 Router holds a SceneSwitcher, but not all methods are usable since Window is not actually a Stage. Its only a BorderPane layout made
 to mimic a stage.
 
-#####Control the view of scene:
+##### Control the view of scene:
 
 Preferred setup is to make the application switchable and bind all fxml documents, or classes if you don't use fxml
 to keys. Example setup:
@@ -58,7 +58,7 @@ SceneSwitcher.getInstance("SceneOne") // the first view to be loaded when applic
         .bindDirectory("fxml", new String[] {"SceneOne", "SceneTwo"}) // Bind fxml directory in resources folder to array of keys
         .show(); // Show the stage
 ```
-#####Bind multiple custom classes
+##### Bind multiple custom classes
 ```java
 SceneSwitcher.getInstance("SceneOne")
         .applySwitchable(primaryStage)
@@ -70,7 +70,7 @@ SceneSwitcher.getInstance("SceneOne")
                 new String[] {"SceneOne", "SceneTwo"})
         .show();
 ```
-#####Bind in sequence:
+##### Bind in sequence:
 ```java
 SceneSwitcher.getInstance("Login", "Application Title")
         .applySwitchable(primaryStage)
@@ -80,7 +80,7 @@ SceneSwitcher.getInstance("Login", "Application Title")
         .bind("Login", new Login())
         .show();
 ```
-#####How to switch scenes when application is switchable:
+##### How to switch scenes when application is switchable:
 ```java
 switchButton.setOnAction(event -> SceneSwitcher
         .getInstance()
@@ -97,7 +97,7 @@ private SceneSwitcher ss = SceneSwitcher.getInstance();
     }
 }
 ```
-#####Applying scene switching to buttons if there is no key, value bindings:
+##### Applying scene switching to buttons if there is no key, value bindings:
 ```java
 button1.setOnAction(event -> {
     SceneSwitcher sceneSwitcher = SceneSwitcher.getInstance();
