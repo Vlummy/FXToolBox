@@ -14,12 +14,6 @@
             <version>5.2.0</version>
             <scope>test</scope>
         </dependency>
-
-        <dependency>
-            <groupId>com.aquafx-project</groupId>
-            <artifactId>aquafx</artifactId>
-            <version>0.1</version>
-        </dependency>
     </dependencies>
 
 
