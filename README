@@ -40,7 +40,9 @@ SceneSwitcher.getInstance("SceneOne", "Application Title")
         .bindDirectory("fxml", new String[] {"SceneOne", "SceneTwo"})
         .show();
 
-SceneSwitcher is used to easily change view of the scene.
+SceneSwitcher is used to easily change view of the scene, but only on Stage. If you choose to use Window class, use Router class.
+Router holds a SceneSwitcher, but not all methods are usable since Window is not actually a Stage. Its only a BorderPane layout made
+to mimic a stage.
 
 Control the view of scene:
 
