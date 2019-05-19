@@ -61,7 +61,7 @@ SceneSwitcher.getInstance("SceneOne") // the first view to be loaded when applic
         .bindDirectory("fxml", new String[] {"SceneOne", "SceneTwo"}) // Bind fxml directory in resources folder to array of keys
         .show(); // Show the stage
 ```
-##### Bind multiple custom classes
+##### Bind multiple views
 ```java
 SceneSwitcher.getInstance("SceneOne")
         .applySwitchable(primaryStage)
@@ -88,18 +88,8 @@ SceneSwitcher.getInstance("Login", "Application Title")
 switchButton.setOnAction(event -> SceneSwitcher
         .getInstance()
         .changeToScene("SceneTwo")); // The key that points to the requested layout
-
-or, every controller can hold a SceneSwitcher so that one does not need to use the getInstance() all the time.
 ```
-```java
-{
-private SceneSwitcher ss = SceneSwitcher.getInstance();
 
-    public void initialize() {
-        switchButton.setOnAction(event -> ss.changeToScene("SceneTwo"));
-    }
-}
-```
 ##### Applying scene switching to buttons if there is no key, value bindings:
 ```java
 button1.setOnAction(event -> {
@@ -107,23 +97,14 @@ button1.setOnAction(event -> {
     sceneSwitcher.changeToScene(event, "fxml/scene_two.fxml"); // Relative path to resources folder
 });
 ```
-```java
-button2.setOnAction(event -> {
-    try {
-        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/scene_two.fxml"));
-        SceneSwitcher sceneSwitcher = SceneSwitcher.getInstance();
-        sceneSwitcher.changeToScene(event, root); // Using preloaded fxml document
-    } catch (IOException e) {
-        e.printStackTrace();
-    }
-});
-```
-```java
-button3.setOnAction(event -> {
-    BorderPane borderPane = new BorderPane();
-    borderPane.setCenter(new Label("It worked!"));
-    SceneSwitcher sceneSwitcher = SceneSwitcher.getInstance();
-    sceneSwitcher.changeToScene(event, borderPane); // Using classes
-});
-```
 
+##### Example using Animations:
+```java
+myButton.setOnAction(event -> Router.switchTo(
+        "login", // Current view
+        "main", // Requested view
+        new FadeOut(0.1), // Animation on current view
+        new FadeIn(0.1) // Animation on requested view
+        )
+);
+```
