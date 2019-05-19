@@ -6,7 +6,6 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -24,6 +23,7 @@ public class SceneSwitcher {
     private Scene scene;
     private Stage stage;
     private String entryView;
+    private String title;
 
     /**
      * Private constructor
@@ -33,29 +33,21 @@ public class SceneSwitcher {
     }
 
     public SceneSwitcher bind(String key, String fxmlDocName) {
-        if(!isSwitchable())
-            throw new IllegalStateException(getIllegalStateMessage());
         sceneBinder.bind(key, fxmlDocName);
         return sceneSwitcher;
     }
 
     public SceneSwitcher bind(String key, Parent view) {
-        if(!isSwitchable())
-            throw new IllegalStateException(getIllegalStateMessage());
         sceneBinder.bind(key, view);
         return sceneSwitcher;
     }
 
     public SceneSwitcher bindListOfViews(Parent[] views, String[] keys) {
-        if(!isSwitchable())
-            throw new IllegalStateException(getIllegalStateMessage());
         sceneBinder.bindListOfViews(views, keys);
         return sceneSwitcher;
     }
 
     public SceneSwitcher bindDirectory(String directoryName, String[] keys) {
-        if(!isSwitchable())
-            throw new IllegalStateException(getIllegalStateMessage());
         sceneBinder.bindDirectory(directoryName, keys);
         return sceneSwitcher;
     }
@@ -85,10 +77,18 @@ public class SceneSwitcher {
         this.scene.setRoot(sceneBinder.getView(key));
     }
 
+    /**
+     * Message indicating that a method has been called but require application to be switchable
+     * @return String message
+     */
     private String getIllegalStateMessage() {
         return "This application is not switchable. To make it switchable, use applySwitchable() method on primary stage and then add bindings";
     }
 
+    /**
+     * Return true if this stage's scene is switchable. Returns false otherwise.
+     * @return boolean True or False
+     */
     private boolean isSwitchable() {
         return this.scene != null;
     }
@@ -138,19 +138,62 @@ public class SceneSwitcher {
      * Returns an singleton instance of SceneSwitcher with a view as first entry when application starts
      * @return SceneSwitcher
      */
-    public static SceneSwitcher getInstance(String key) {
-        getInstance().setMainEntryView(key);
+    public static SceneSwitcher getInstance(String firstView) {
+        getInstance().setFirstScene(firstView);
         return sceneSwitcher;
     }
 
-    private void setMainEntryView(String key) {
+    /**
+     * Returns an singleton instance of SceneSwitcher with a view as first entry when application starts
+     * @return SceneSwitcher
+     */
+    public static SceneSwitcher getInstance(String firstView, String title) {
+        getInstance().setFirstScene(firstView);
+        getInstance().setTitle(title);
+        return sceneSwitcher;
+    }
+
+    private void setTitle(String title) {
+        this.title = title;
+    }
+
+    /**
+     * Uses the provided key to set the scenes view on application start
+     * @param key The key that points to preferred view
+     */
+    private void setFirstScene(String key) {
         this.entryView = key;
     }
 
+    public Stage getStage() {
+        return this.stage;
+    }
+
+    /**
+     * Displays the stage
+     */
     public void show() {
-        if(this.entryView != null) {
+        if(this.entryView != null)
             changeToScene(this.entryView);
-        }
+
+        if(this.title != null)
+            this.stage.setTitle(this.title);
+
         this.stage.show();
+    }
+
+    /**
+     * Retrieves a view by key
+     * @return The view that is binned with a key
+     */
+    public Parent getView(String key) {
+        return sceneBinder.getView(key);
+    }
+
+    /**
+     * Exits the application
+     */
+    public void exit() {
+        this.stage.close();
     }
 }
