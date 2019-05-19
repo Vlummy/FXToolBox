@@ -31,9 +31,9 @@ Router.connect(new Window(primaryStage)
 );
 ```
 #####Switching a view with Router:
-
+```java
 logInButton.setOnAction(event -> Router.switchTo("system"));
-
+```
 Example using SceneSwitcher class:
 ```java
 SceneSwitcher.getInstance("SceneOne", "Application Title")
