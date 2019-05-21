@@ -2,6 +2,7 @@ package SimpleAnimator;
 
 import Window.Router;
 import javafx.animation.FadeTransition;
+import javafx.animation.Interpolator;
 import javafx.scene.Node;
 import javafx.util.Duration;
 
@@ -18,8 +19,9 @@ public class FadeOut implements Animatable {
             ft.setFromValue(1.0);
             ft.setToValue(0.0);
             ft.setCycleCount(1);
+            ft.setInterpolator(Interpolator.SPLINE(0.0, 0.2, 0.0, 1.0));
             ft.setAutoReverse(false);
-
+            ft.setOnFinished(event -> node.setOpacity(1.0));
             ft.play();
 
             return ft.getNode();
@@ -32,8 +34,10 @@ public class FadeOut implements Animatable {
         ft.setToValue(0.0);
         ft.setCycleCount(1);
         ft.setAutoReverse(false);
+        ft.setInterpolator(Interpolator.SPLINE(0.0, 0.2, 0.0, 1.0));
         ft.setOnFinished(event -> {
             Router.switchTo(key, animatable);
+            node.setOpacity(1.0);
         });
 
         ft.play();
