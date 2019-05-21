@@ -8,7 +8,6 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-
 import java.io.IOException;
 import java.util.Objects;
 
@@ -22,26 +21,31 @@ import java.util.Objects;
  */
 public class Window {
     private BorderPane window;
-    private Stage stage;
     private SceneSwitcher ss = SceneSwitcher.getInstance();
 
     /**
-     * Constructor
+     * Constructor for this Custom window class.
+     * There are some identifications that are important to know about.
+     * This window is automatically binned to the key "window". So you can get the window from with this key.
+     * The close, minimize, expand and title labels of the Window class has id's "close", "minimize", "expand" and "title".
+     *
      * @param stage
      */
     public Window(Stage stage) {
-        this.stage = stage;
+        OpenCloseAction.setStage(stage);
         try {
             window = FXMLLoader.load(Objects.requireNonNull(this.getClass().getClassLoader().getResource("fxml/window.fxml")));
         } catch (IOException e) {
             e.printStackTrace();
         }
-        this.stage.setScene(new Scene(window));
-        this.stage.initStyle(StageStyle.TRANSPARENT);
+        stage.setScene(new Scene(window));
+        stage.initStyle(StageStyle.TRANSPARENT);
 
         window.getStylesheets().add(this.getClass().getClassLoader().getResource("styles/windowStyle.css").toString());
 
-        ResizeHelper.addResizeListener(this.stage);
+        ResizeHelper.addResizeListener(stage);
+
+        this.bind("window", this.window);
     }
 
     public Window bindDirectory(String directoryName, String[] keys) {
@@ -148,7 +152,7 @@ public class Window {
      * @return
      */
     public Window show() {
-        this.stage.show();
+        OpenCloseAction.open();
         return this;
     }
 }

@@ -2,6 +2,7 @@ package SimpleAnimator;
 
 import Window.Router;
 import javafx.animation.FadeTransition;
+import javafx.animation.Interpolator;
 import javafx.scene.Node;
 import javafx.util.Duration;
 
@@ -14,12 +15,14 @@ public class FadeIn implements Animatable {
 
     @Override
     public Node fire(Node node) {
-        node.setOpacity(0);
+        node.setOpacity(0.0);
         ft.setNode(node);
         ft.setFromValue(0.0);
         ft.setToValue(1.0);
         ft.setCycleCount(1);
+        ft.setInterpolator(Interpolator.SPLINE(0.0, 0.0, 0.0, 0.2));
         ft.setAutoReverse(false);
+        ft.setOnFinished(event -> node.setOpacity(1.0));
 
         ft.play();
 
@@ -28,14 +31,16 @@ public class FadeIn implements Animatable {
 
     @Override
     public void fire(Node node, String key, Animatable animatable) {
-        node.setOpacity(0);
+        node.setOpacity(0.0);
         ft.setNode(node);
         ft.setFromValue(0.0);
         ft.setToValue(1.0);
         ft.setCycleCount(1);
         ft.setAutoReverse(false);
+        ft.setInterpolator(Interpolator.SPLINE(0.0, 0.0, 0.0, 0.2));
         ft.setOnFinished(event -> {
             Router.switchTo(key, animatable);
+            node.setOpacity(1.0);
         });
 
         ft.play();
