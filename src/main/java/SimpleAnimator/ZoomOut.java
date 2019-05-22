@@ -6,6 +6,11 @@ import javafx.animation.ScaleTransition;
 import javafx.scene.Node;
 import javafx.util.Duration;
 
+/**
+ * Animation that zooms a node out to point zero
+ * Author: Øyvind Johannessen
+ * Version: 0.1
+ */
 public class ZoomOut implements Animatable {
     ScaleTransition st = new ScaleTransition();
 

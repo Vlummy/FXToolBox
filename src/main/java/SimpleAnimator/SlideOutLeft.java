@@ -8,6 +8,11 @@ import javafx.scene.Node;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+/**
+ * Animation that slides the node out to the left
+ * Author: Øyvind Johannessen
+ * Version: 0.1
+ */
 public class SlideOutLeft implements Animatable {
     private TranslateTransition tt = new TranslateTransition();
 

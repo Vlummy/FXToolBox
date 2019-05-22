@@ -6,6 +6,11 @@ import javafx.animation.Interpolator;
 import javafx.scene.Node;
 import javafx.util.Duration;
 
+/**
+ * Animation that fades the node in
+ * Author: Øyvind Johannessen
+ * Version: 0.1
+ */
 public class FadeIn implements Animatable {
     private FadeTransition ft = new FadeTransition();
 
