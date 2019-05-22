@@ -80,8 +80,28 @@ public class OpenCloseAction {
         OpenCloseAction.getInstance().privateClose();
     }
 
+    /**
+     * Set the stage
+     * @param stage
+     */
     public static void setStage(Stage stage) {
         OpenCloseAction.getInstance().privateSetStage(stage);
+    }
+
+    /**
+     * Get the stage
+      * @return Stage
+     */
+    public static Stage getStage() {
+        return OpenCloseAction.getInstance().privateGetStage();
+    }
+
+    /**
+     * Private method to get the stage from the instance
+      * @return Stage
+     */
+    private Stage privateGetStage() {
+        return this.stage;
     }
 
     /**
