@@ -108,3 +108,4 @@ myButton.setOnAction(event -> Router.switchTo(
         )
 );
 ```
+To create custom animations, implement the Animatable interface to you class.

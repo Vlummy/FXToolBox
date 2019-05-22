@@ -8,6 +8,11 @@ import javafx.scene.Node;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+/**
+ * Animation that slides the node in from the left
+ * Author: Øyvind Johannessen
+ * Version: 0.1
+ */
 public class SlideInLeft implements Animatable {
     private TranslateTransition tt = new TranslateTransition();
 

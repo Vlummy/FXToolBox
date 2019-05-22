@@ -6,6 +6,11 @@ import javafx.animation.ScaleTransition;
 import javafx.scene.Node;
 import javafx.util.Duration;
 
+/**
+ * Animation that zooms a node in from point zero
+ * Author: Øyvind Johannessen
+ * Version: 0.1
+ */
 public class ZoomIn implements Animatable {
     ScaleTransition st = new ScaleTransition();
 
