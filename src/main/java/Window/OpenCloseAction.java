@@ -33,6 +33,7 @@ public class OpenCloseAction {
      * Closes the application after a transition downwards.
      */
     private void privateClose() {
+        timer = new Timer();
         TimerTask task = new TimerTask() {
             double yPos = stage.getY();
             @Override
@@ -44,7 +45,7 @@ public class OpenCloseAction {
                 }
             }
         };
-        timer.scheduleAtFixedRate(task, 0, 1);
+        timer.schedule(task, 0, 1);
     }
 
     /**
@@ -60,10 +61,12 @@ public class OpenCloseAction {
                 if(stage.getY() > originalPosition) {
                     stage.setY(stage.getY());
                     stage.setY(stage.getY() - 3);
+                } else {
+                    timer.cancel();
                 }
             }
         };
-        timer.scheduleAtFixedRate(task, 0,1);
+        timer.schedule(task, 0,1);
     }
 
     /**

@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import java.io.IOException;
 import java.util.Objects;
+import java.util.Timer;
 
 /**
  * Window class represents a more customizable and fresh window for javafx application. It has the same features as
