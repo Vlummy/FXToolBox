@@ -21,8 +21,9 @@ new Window(primaryStage)
     .setView("login")
     .setTitle("Custom Window")
     .setHeaderStyle("-fx-background-color: lightblue;")
+    .addCSSFile("styles/customStyle.css") // #window id is reserved for the main window.
+    .addBorderRadius(12.0)
     .show();
-```
 
 ##### Example using Window with Router to easily switch view:
 
@@ -109,3 +110,19 @@ myButton.setOnAction(event -> Router.switchTo(
 );
 ```
 To create custom animations, implement the Animatable interface to you class.
+
+#### Font
+To add font TTF files add a custom css file which is located in the resources folder.
+add the font
+````css
+@font-face {
+    src: url("Livvic-Regular.ttf");
+}
+
+.root {
+    -fx-font-family: 'Livvic Regular', sans-serif;
+}
+````
+
+Remeber to put the .ttf file in the same folder as the css file or use a relative path.
+The above font filename is just an example.
