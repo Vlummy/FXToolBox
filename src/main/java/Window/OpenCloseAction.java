@@ -45,7 +45,7 @@ public class OpenCloseAction {
                 }
             }
         };
-        timer.schedule(task, 0, 1);
+        timer.scheduleAtFixedRate(task, 0, 1);
     }
 
     /**
@@ -66,7 +66,7 @@ public class OpenCloseAction {
                 }
             }
         };
-        timer.schedule(task, 0,1);
+        timer.scheduleAtFixedRate(task, 0,1);
     }
 
     /**
